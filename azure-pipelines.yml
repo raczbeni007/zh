@@ -1,0 +1,19 @@
+trigger:
+- main
+pool:
+vm|mage: 'ubuntu-latest'
+steps:
+# 1. Python telepitése
+- task: UsePython Version@0
+inputs:
+versionSpec: '3.x'
+addToPath: true
+# 2. Függöségek telepítése
+- script: |
+python -m pip install --upgrade pip
+pip install pytest
+displayName: 'Install dependencies'
+# 3. Tesztek futtatása
+- script:
+pytest
+displayName: 'Run tests'
